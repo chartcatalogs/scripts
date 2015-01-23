@@ -58,7 +58,7 @@ class BrasRNCHTMLParser(HTMLParser):
                     self.chart.ntm_edition_last_correction = data.strip()
 
     def print_xml(self):
-        self.catalog.print_xml()
+        self.catalog.print_xml(True)
 
 if len(sys.argv) < 2:
     print 'ERROR: Filename parameter missing'

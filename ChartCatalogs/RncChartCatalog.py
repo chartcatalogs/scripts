@@ -40,14 +40,14 @@ class RncChartCatalog:
         t = SubElement(header, 's62AgencyCode')
         t.text = self.s62AgencyCode
 
-    def xml_add_charts(self):
+    def xml_add_charts(self, chart_name_include_number):
         for chart in self.charts:
-            chart.append_xml_element(self.xml)
+            chart.append_xml_element(self.xml, chart_name_include_number)
 
-    def print_xml(self):
+    def print_xml(self, chart_name_include_number = False):
         self.xml = Element('RncProductCatalogChartCatalogs')
         self.xml_add_header()
-        self.xml_add_charts()
+        self.xml_add_charts(chart_name_include_number)
         print tostring(self.xml)
 
     def add_chart(self, chart):

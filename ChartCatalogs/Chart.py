@@ -21,12 +21,15 @@ class Chart:
     def is_valid(self):
         return self.number != 0 and self.title != '' and self.url != '' and self.zipfile_ts != None
 
-    def append_xml_element(self, parent):
+    def append_xml_element(self, parent, chart_name_include_number = False):
         e = SubElement(parent, 'chart')
         child = SubElement(e, 'number')
         child.text = self.number
         child = SubElement(e, 'title')
-        child.text = self.title
+        if chart_name_include_number:
+            child.text = self.title + " (" + self.number + ")"
+        else:
+            child.text = self.title
         if self.vertical_datum != None:
             child = SubElement(e, 'vertical_datum')
             child.text = self.vertical_datum
