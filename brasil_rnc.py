@@ -46,7 +46,7 @@ class BrasRNCHTMLParser(HTMLParser):
         if self.inColumn:
             if self.inColumn:
                 if self.column == 1:
-                    self.chart.number = data.strip()
+                    self.chart.number = data.strip().replace(" ", "_")
                 if self.column == 2:
                     self.chart.title = data.strip()
                 if self.column == 4:
