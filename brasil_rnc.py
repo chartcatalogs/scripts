@@ -11,6 +11,7 @@ from HTMLParser import HTMLParser
 from ChartCatalogs import Chart, RncChartCatalog
 from datetime import datetime
 import codecs
+from pprint import pprint
 
 class BrasRNCHTMLParser(HTMLParser):
     def __init__(self):
@@ -21,6 +22,7 @@ class BrasRNCHTMLParser(HTMLParser):
         self.base_url = ''
         self.catalog = RncChartCatalog()
         self.catalog.title = "Brasil RNC Charts"
+        self.inLink = False
 
     def handle_starttag(self, tag, attrs):
         if tag == 'tr':
@@ -33,11 +35,19 @@ class BrasRNCHTMLParser(HTMLParser):
             for attr in attrs:
                 if attr[0] == 'href':
                     self.chart.url = self.base_url + attr[1]
+        elif tag == 'a' and self.inColumn and self.column == 2:
+              for attr in attrs:
+                  if attr[0] == 'href':
+                      self.inLink = True;
 
     def handle_endtag(self, tag):
         if tag == 'tr':
             if self.chart.is_valid():
                 self.catalog.add_chart(self.chart)
+            else:
+                print "<!-- unavailable/invalid?"
+                pprint(vars(self.chart))
+                print "-->"
             self.column = 0
         elif tag == 'td':
             self.inColumn = False
@@ -48,7 +58,9 @@ class BrasRNCHTMLParser(HTMLParser):
                 if self.column == 1:
                     self.chart.number = data.strip().replace(" ", "_")
                 if self.column == 2:
-                    self.chart.title = data.strip()
+                    if self.inLink and data.strip() != '':
+                        self.chart.title = data.strip()
+                        self.inLink = False
                 if self.column == 4:
                     try:
                         self.chart.zipfile_ts = datetime.strptime(data.strip(), '%d/%m/%Y')

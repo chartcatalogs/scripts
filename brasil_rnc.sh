@@ -15,8 +15,8 @@ fi
 CATALOGNAME='BR_RNC_Catalog.xml'
 
 WORKDIR='/tmp'
-if wget -q -P ${WORKDIR} http://www.mar.mil.br/dhn/chm/box-cartas-raster/raster_disponiveis.html; then
-  ./brasil_rnc.py ${WORKDIR}/raster_disponiveis.html http://www.mar.mil.br/dhn/chm/box-cartas-raster/ > ${WORKDIR}/${CATALOGNAME}
+if [ -f ${WORKDIR}/raster_disponiveis.html ] || curl https://www.marinha.mil.br/chm/dados-do-segnav/cartas-raster > ${WORKDIR}/raster_disponiveis.html; then
+  ./brasil_rnc.py ${WORKDIR}/raster_disponiveis.html "" > ${WORKDIR}/${CATALOGNAME}
   if xmllint --noout ${WORKDIR}/${CATALOGNAME} 2>&1 >/dev/null; then
     cat ${WORKDIR}/${CATALOGNAME} | xmllint --format - >  ${TARGETDIR}/${CATALOGNAME}
     rm ${WORKDIR}/${CATALOGNAME}
