@@ -22,7 +22,7 @@ with open(sys.argv[1]) as f:
         chart.chart_format = 'Sailing Chart, International Chart'
         chart.url = "https:%s" % data['quilted_tilesets'][tileset]['url']
         chart.number = data['quilted_tilesets'][tileset]['name'][-2:]
-        chart.title = data['quilted_tilesets'][tileset]['description']
+        chart.title = "%s [%i MB]" % (data['quilted_tilesets'][tileset]['description'], data['quilted_tilesets'][tileset]['size'])
         chart.zipfile_ts = dateutil.parser.parse(data['quilted_tilesets'][tileset]['updated'])
         catalog.add_chart(chart)
 
