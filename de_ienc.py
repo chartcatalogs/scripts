@@ -1,5 +1,5 @@
 #!/usr/bin/python
-"""Script to process the HTML Brasilian RNC charts list and convert it to the XML catalog format
+"""Script to process the Atom feed of the German IENC charts list and convert it to the XML catalog format
 Part of the ChartCatalogs project
 Copyright (c) 2019 Pavel Kalian
 Licensed under GPLv2 or, at yoir will later version
