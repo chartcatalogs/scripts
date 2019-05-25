@@ -16,6 +16,7 @@ fi
 CATALOGNAME='NOAA_MBTiles_Catalog.xml'
 
 WORKDIR='/tmp'
+rm -f ${WORKDIR}/mbtiles_catalog.json
 if wget -q -P ${WORKDIR} https://tileservice.charts.noaa.gov/mbtiles/mbtiles_catalog.json; then
   ./noaa_mbtiles.py ${WORKDIR}/mbtiles_catalog.json > ${WORKDIR}/${CATALOGNAME}
   if xmllint --noout ${WORKDIR}/${CATALOGNAME} 2>&1 >/dev/null; then

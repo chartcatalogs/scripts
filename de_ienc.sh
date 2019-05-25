@@ -16,6 +16,7 @@ fi
 CATALOGNAME='DE_IENC_Catalog.xml'
 
 WORKDIR='/tmp'
+rm -f ${WORKDIR}/ienc_feed.xml
 if wget -q -P ${WORKDIR} https://www.elwis.de/DE/dynamisch/IENC/enc-dateien/ienc_feed.xml; then
   ./de_ienc.py ${WORKDIR}/ienc_feed.xml > ${WORKDIR}/${CATALOGNAME}
   if xmllint --noout ${WORKDIR}/${CATALOGNAME} 2>&1 >/dev/null; then
