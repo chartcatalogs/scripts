@@ -1,10 +1,9 @@
 #!/usr/bin/python
 """Script to process the JSON feed of the Dutch IENC charts list and convert it to the XML catalog format
 Part of the ChartCatalogs project
-Copyright (c) 2019 Marcel Verpaalen
+Copyright (c) 2019-2020 Marcel Verpaalen
 Licensed under GPLv2 or, at your will later version
 """
-
 
 import sys
 from ChartCatalogs import Chart, RncChartCatalog
@@ -24,6 +23,7 @@ with open(sys.argv[1]) as f:
         chart.number = "%s" % cnt
         chart.title = "%s" % tileset['name']
         chart.zipfile_ts = datetime.fromtimestamp(tileset['date']/1000)
+        chart.target_filename = "%s.zip" % tileset['name']
         catalog.add_chart(chart)
         cnt=cnt+1
 

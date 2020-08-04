@@ -17,6 +17,7 @@ class Chart:
         self.chart_format = None
         self.zipfile_ts = None
         self.zipfile_size = 0
+        self.target_filename = None
 
     def is_valid(self):
         return self.number != 0 and self.title != '' and self.url != '' and self.zipfile_ts != None
@@ -51,10 +52,13 @@ class Chart:
         if self.ntm_edition_last_correction != None:
             child = SubElement(e, 'ntm_edition_last_correction')
             child.text = self.ntm_edition_last_correction
+        if self.target_filename != None:
+            child = SubElement(e, 'target_filename')
+            child.text = self.target_filename
 
     def print_info(self):
-        print self.number
-        print self.title
-        print self.url
-        print self.date
-        print self.ntm
+        print (self.number)
+        print (self.title)
+        print (self.url)
+        print (self.ntm_edition_last_correction)
+
