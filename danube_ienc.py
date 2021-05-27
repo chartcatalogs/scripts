@@ -43,7 +43,7 @@ class DanubeIENCHTMLParser(HTMLParser):
 
     def handle_endtag(self, tag):
         if tag == 'tr':
-            self.chart.number = "Base" + str(self.row + 1)
+            self.chart.number = "Base" + str(self.row)
             if self.row > 0 and self.chart.is_valid():
                 self.catalog.add_chart(self.chart)
             else:
@@ -71,6 +71,7 @@ class DanubeIENCHTMLParser(HTMLParser):
                     try:
                         self.chart.zipfile_ts = datetime.strptime(data.strip(), '%Y-%m-%d')
                     except:
+                        self.chart.zipfile_ts = datetime.strptime("1900-01-01", '%Y-%m-%d')
                         pass
                 if self.column == 5:
                     self.chart.ntm_edition_last_correction = "0"

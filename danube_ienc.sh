@@ -36,7 +36,7 @@ function process_country() {
   fi
 }
 
-process_country "AT_IENC_Catalog.xml" "https://www.danubeportal.com/charts/electronicChart/AT" "Austria IENC Charts"
+#process_country "AT_IENC_Catalog.xml" "https://www.danubeportal.com/charts/electronicChart/AT" "Austria IENC Charts"
 process_country "SK_IENC_Catalog.xml" "https://www.danubeportal.com/charts/electronicChart/SK" "Slovakia IENC Charts"
 process_country "HU_IENC_Catalog.xml" "https://www.danubeportal.com/charts/electronicChart/HU" "Hungary IENC Charts"
 process_country "HR_IENC_Catalog.xml" "https://www.danubeportal.com/charts/electronicChart/HR" "Croatia IENC Charts"
