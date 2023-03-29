@@ -29,7 +29,7 @@ with open(sys.argv[1]) as f:
         try:
             response = urlopen(chart.url)
             d = response.headers['content-disposition']
-            filename = re.findall("filename=(.+)", d)[0]
+            filename = re.findall("filename=\"(.+)\"", d)[0]
             if filename is not None:
                 chart.target_filename = filename
         except Exception:
