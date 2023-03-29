@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# Script to download German IENC charts list and convert it to the XML catalog format 
+# Script to download Dutch IENC charts list and convert it to the XML catalog format 
 #
 # Part of the ChartCatalogs project
-# Copyright (c) 2019 Pavel Kalian
+# Copyright (c) 2019-2023 Pavel Kalian
 # Licensed under GPLv2 or, at your will later version
 #
 
