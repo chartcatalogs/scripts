@@ -19,7 +19,7 @@ xmldoc = ET.parse(sys.argv[1])
 
 feed = xmldoc.getroot()
 
-for entry in feed.findall('item'):
+for entry in feed.find('channel').findall('item'):
     chart = Chart()
     chart.chart_format = 'Sailing Chart, International Chart'
     chart.url = entry.find('link').text
