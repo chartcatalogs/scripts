@@ -30,6 +30,9 @@ header.append(create_xml_node('s62AgencyCode', '0'))
 response = requests.get('https://www.eurisportal.eu/AWFIENC/api/IENC/GetIENCOverviewList', headers={'accept': 'application/json'})
 api_data = response.json()
 
+# Let's sort the charts by cell name, it will put them together by area due to the standard cell numbering schema
+api_data.sort(key=lambda x: x['name'], reverse=False)
+
 for item in api_data:
     dt = parser.parse(item['filesModifiedDate'])
     chart = ET.SubElement(root, "chart")
