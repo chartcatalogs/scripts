@@ -6,10 +6,11 @@ Licensed under GPLv2 or, at your will later version
 """
 
 import sys
-from ChartCatalogs import Chart, RncChartCatalog
+from ChartCatalogs.RncChartCatalog import RncChartCatalog
+from ChartCatalogs.Chart import Chart
 from datetime import datetime
 import json
-from urllib import urlopen
+from urllib.request import urlopen
 import re
 
 catalog = RncChartCatalog()

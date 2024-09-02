@@ -48,7 +48,7 @@ class RncChartCatalog:
         self.xml = Element('RncProductCatalogChartCatalogs')
         self.xml_add_header()
         self.xml_add_charts(chart_name_include_number)
-        print(tostring(self.xml))
+        print(tostring(self.xml).decode())
 
     def add_chart(self, chart):
         self.charts.append(chart)

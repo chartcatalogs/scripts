@@ -7,8 +7,9 @@ Licensed under GPLv2 or, at yoir will later version
 
 
 import sys
-from HTMLParser import HTMLParser
-from ChartCatalogs import Chart, RncChartCatalog
+from html.parser import HTMLParser
+from ChartCatalogs.RncChartCatalog import RncChartCatalog
+from ChartCatalogs.Chart import Chart
 from datetime import datetime
 import codecs
 from pprint import pprint
@@ -48,9 +49,9 @@ class DanubeIENCHTMLParser(HTMLParser):
                 self.catalog.add_chart(self.chart)
             else:
                 if self.row > 0:
-                    print "<!-- unavailable/invalid?"
+                    print("<!-- unavailable/invalid?")
                     pprint(vars(self.chart))
-                    print "-->"
+                    print("-->")
             self.column = 0
             self.row += 1
         elif tag == 'td':
@@ -80,10 +81,10 @@ class DanubeIENCHTMLParser(HTMLParser):
         self.catalog.print_xml(True)
 
 if len(sys.argv) < 2:
-    print 'ERROR: Filename parameter missing'
+    print('ERROR: Filename parameter missing')
 if len(sys.argv) < 3:
-    print 'ERROR: Base URL parameter is missing'
-    print 'Usage danube_ienc.py <filename> <title>'
+    print('ERROR: Base URL parameter is missing')
+    print('Usage danube_ienc.py <filename> <title>')
     exit(1)
 
 
