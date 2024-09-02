@@ -41,6 +41,7 @@ for item in api_data:
     if(len(item['areas']) > 0):
         area_name = item['areas'][0]['areaName']
     cell_name = item['name']
+    chart.append(create_xml_node('target_filename', cell_name + ".zip"))
     cell_description = item['description']
     if cell_description.startswith(area_name):
         cell_name += " - {cd}".format(cd = cell_description)
