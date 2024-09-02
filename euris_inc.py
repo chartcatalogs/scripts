@@ -54,4 +54,5 @@ for item in api_data:
     chart.append(create_xml_node('zipfile_datetime_iso8601', dt.strftime('%Y-%m-%dT%H:%M:%SZ')))
 
 tree = ET.ElementTree(root)
+ET.indent(tree, space=" ", level=0)
 tree.write("EURIS_IENC_Catalog.xml", encoding='utf-8', xml_declaration=True)
