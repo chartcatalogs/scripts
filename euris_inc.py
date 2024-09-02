@@ -34,7 +34,16 @@ for item in api_data:
     dt = parser.parse(item['filesModifiedDate'])
     chart = ET.SubElement(root, "chart")
     chart.append(create_xml_node('number', str(zlib.crc32(item['mapID'].encode('utf-8')))))
-    chart.append(create_xml_node('title', item['name']))
+    area_name = ''
+    if(len(item['areas']) > 0):
+        area_name = item['areas'][0]['areaName']
+    cell_name = item['name']
+    cell_description = item['description']
+    if cell_description.startswith(area_name):
+        cell_name += " - {cd}".format(cd = cell_description)
+    else:
+        cell_name += " - {an} - {cd}".format(an = area_name, cd = cell_description)
+    chart.append(create_xml_node('title', cell_name))
     chart.append(create_xml_node('format', 'Sailing Chart, International Chart'))
     chart.append(create_xml_node('zipfile_location', f"https://www.eurisportal.eu/AWFIENC/api/IENC/DownloadIENCMap?mapID={item['mapID']}"))
     chart.append(create_xml_node('zipfile_datetime', dt.strftime('%Y%m%d_%H%M%S')))
