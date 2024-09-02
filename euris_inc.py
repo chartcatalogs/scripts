@@ -43,10 +43,11 @@ for item in api_data:
     cell_name = item['name']
     chart.append(create_xml_node('target_filename', cell_name + ".zip"))
     cell_description = item['description']
-    if cell_description.startswith(area_name):
-        cell_name += " - {cd}".format(cd = cell_description)
-    else:
-        cell_name += " - {an} - {cd}".format(an = area_name, cd = cell_description)
+    if(len(cell_description) > 0):
+        if cell_description.startswith(area_name) or len(area_name) == 0:
+            cell_name += " - {cd}".format(cd = cell_description)
+        else:
+            cell_name += " - {an} - {cd}".format(an = area_name, cd = cell_description)
     chart.append(create_xml_node('title', cell_name))
     chart.append(create_xml_node('format', 'Sailing Chart, International Chart'))
     chart.append(create_xml_node('zipfile_location', f"https://www.eurisportal.eu/AWFIENC/api/IENC/DownloadIENCMap?mapID={item['mapID']}"))
