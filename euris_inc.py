@@ -30,10 +30,20 @@ header.append(create_xml_node('s62AgencyCode', '0'))
 response = requests.get('https://www.eurisportal.eu/AWFIENC/api/IENC/GetIENCOverviewList', headers={'accept': 'application/json'})
 api_data = response.json()
 
-# Let's sort the charts by cell name, it will put them together by area due to the standard cell numbering schema
-api_data.sort(key=lambda x: x['name'], reverse=False)
-
+# Let's sort the charts by cell name and update date in reverse order and drop possible older versions of the same cell
+api_data.sort(key=lambda x: x['name']+x['filesModifiedDate'], reverse=True)
+last_cell=''
+clean_data=[]
 for item in api_data:
+    if item['name'] == last_cell:
+        continue # Do not add older version of the same cell (1H7D1540 erroneous data)
+    clean_data.append(item)
+    last_cell = item['name']
+
+# Let's resort the charts by cell name in alphabetical ascending order, it will put them together by area due to the standard cell numbering schema
+clean_data.sort(key=lambda x: x['name'], reverse=False)
+
+for item in clean_data:
     dt = parser.parse(item['filesModifiedDate'])
     chart = ET.SubElement(root, "chart")
     chart.append(create_xml_node('number', str(zlib.crc32(item['mapID'].encode('utf-8')))))
