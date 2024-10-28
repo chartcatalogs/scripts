@@ -39,7 +39,8 @@ def ProcessPage(catalog, page = 0):
             chart.title = columns[1].get_text(strip=True)
             chart.url = columns[2].find('a')['href']
             chart.zipfile_ts = datetime.strptime(columns[3].get_text(strip=True).strip(), '%d/%m/%Y')
-            catalog.add_chart(chart)
+            if len(chart.number) > 0:
+                catalog.add_chart(chart)
 
 catalog = RncChartCatalog()
 catalog.title = "Brasil RNC Charts"
