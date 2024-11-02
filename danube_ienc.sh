@@ -24,7 +24,7 @@ function process_country() {
 
   WORKDIR='/tmp'
   if curl -f -o "${WORKDIR}/danube_ienc.html" "$URL"; then
-    ./danube_ienc.py ${WORKDIR}/danube_ienc.html "" > ${WORKDIR}/${CATALOGNAME}
+    ./danube_ienc.py ${WORKDIR}/danube_ienc.html "${TITLE}" > ${WORKDIR}/${CATALOGNAME}
     if xmllint --noout ${WORKDIR}/${CATALOGNAME} 2>&1 >/dev/null; then
       cat ${WORKDIR}/${CATALOGNAME} | xmllint --format - >  ${TARGETDIR}/${CATALOGNAME}
       rm ${WORKDIR}/${CATALOGNAME}
