@@ -16,7 +16,7 @@ CATALOGNAME='BR_RNC_Catalog.xml'
 
 WORKDIR='/tmp'
 if [ -f ${WORKDIR}/raster_disponiveis.html ] || curl https://www.marinha.mil.br/chm/dados-do-segnav/cartas-raster > ${WORKDIR}/raster_disponiveis.html; then
-  ./brasil_rnc.py ${WORKDIR}/raster_disponiveis.html "" > ${WORKDIR}/${CATALOGNAME}
+  ./brasil_rnc.py ${WORKDIR}/raster_disponiveis.html "https://www.marinha.mil.br" > ${WORKDIR}/${CATALOGNAME}
   if xmllint --noout ${WORKDIR}/${CATALOGNAME} 2>&1 >/dev/null; then
     cat ${WORKDIR}/${CATALOGNAME} | xmllint --format - >  ${TARGETDIR}/${CATALOGNAME}
     rm ${WORKDIR}/${CATALOGNAME}
