@@ -12,6 +12,7 @@ from ChartCatalogs.Chart import Chart
 from datetime import datetime
 import xml.etree.ElementTree as ET
 import dateutil.parser
+from urllib.parse import quote
 
 catalog = RncChartCatalog()
 catalog.title = "DE IENC Charts"
@@ -23,8 +24,10 @@ feed = xmldoc.getroot()
 for entry in feed.findall('{http://www.w3.org/2005/Atom}entry'):
     chart = Chart()
     chart.chart_format = 'Sailing Chart, International Chart'
-    chart.url = entry.find('{http://www.w3.org/2005/Atom}id').text
-    chart.number = entry.find('{http://www.w3.org/2005/Atom}link').attrib['title'][2:4]
+    link = entry.find('{http://www.w3.org/2005/Atom}link')
+    chart.url = quote(link.attrib['href'], safe="/:@!$&'()*+,;=%-#?")
+    chart.target_filename = link.attrib['title'] + '.zip'
+    chart.number = link.attrib['title'][2:4]
     chart.title = entry.find('{http://www.w3.org/2005/Atom}title').text
     chart.zipfile_ts = dateutil.parser.parse(entry.find('{http://www.w3.org/2005/Atom}updated').text)
     catalog.add_chart(chart)
