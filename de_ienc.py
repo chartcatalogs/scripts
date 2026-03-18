@@ -7,7 +7,8 @@ Licensed under GPLv2 or, at yoir will later version
 
 
 import sys
-from ChartCatalogs import Chart, RncChartCatalog
+from ChartCatalogs.RncChartCatalog import RncChartCatalog
+from ChartCatalogs.Chart import Chart
 from datetime import datetime
 import xml.etree.ElementTree as ET
 import dateutil.parser
